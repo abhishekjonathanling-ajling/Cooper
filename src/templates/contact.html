@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media %}
+{% block content %}
+
+<section class="phero" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="phero__label">
+      <p class="label">Contact</p>
+      <p class="label muted">Start a project</p>
+    </div>
+    <h1 class="d1" id="contact-title" data-split>Start a&nbsp;project.</h1>
+    <p class="lead muted measure mt-2" data-reveal data-delay="250">Call the office, or tell us about the property below. We will arrange a conversation and, where it helps, a site&nbsp;survey.</p>
+    <a class="contact-hero__phone" href="tel:+18772667379" data-reveal data-delay="400">(877) 266&#8209;7379</a>
+    <div class="cinfo">
+      <div data-reveal>
+        <p class="label muted">Call</p>
+        <p class="tnum">(877) 266-7379</p>
+        <p class="small muted">Also 1.877.COOPER.9</p>
+        <button class="link" type="button" data-copy="(877) 266-7379" style="justify-self:start"><span>Copy number</span></button>
+      </div>
+      <div data-reveal data-delay="80">
+        <p class="label muted">Visit</p>
+        <address>1603 Springtown Rd<br>Alpha, NJ 08865-4631</address>
+        <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=1603+Springtown+Rd+Alpha+NJ+08865" target="_blank" rel="noopener" style="justify-self:start">Open in Google Maps {{ arrow() }}</a>
+      </div>
+      <div data-reveal data-delay="160">
+        <p class="label muted">Service area</p>
+        <p>North &amp; Central New Jersey, Eastern Pennsylvania, New York City</p>
+      </div>
+      <div data-reveal data-delay="240">
+        <p class="label muted">Existing customers</p>
+        <p>Call the office for service, maintenance or an upgrade to a system we&nbsp;installed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="form-title">
+  <div class="wrap grid form-wrap">
+    <div class="form-wrap__intro">
+      <p class="label" data-reveal>Project details</p>
+      <h2 class="d3" id="form-title" data-split>Tell us what you are&nbsp;planning.</h2>
+      <p class="muted" data-reveal>A few details help us bring the right person to the first call. Only the fields marked required are&nbsp;needed.</p>
+      {{ media("hero-dusk", "", "(min-width: 900px) 30vw, 100vw", style="aspect-ratio:4/5;margin-top:1rem") }}
+    </div>
+
+    <form class="form" id="project-form" novalidate data-endpoint="">
+      <fieldset class="fieldset">
+        <legend class="label">Project type</legend>
+        <div class="toggles">
+          <label class="toggle"><input type="radio" name="type" value="Residential" checked><span>Residential</span></label>
+          <label class="toggle"><input type="radio" name="type" value="Commercial"><span>Commercial</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="label">Systems of interest</legend>
+        <div class="toggles">
+          {%- for s in ["Security & fire", "Surveillance", "Access & smart locks", "Automation & lighting", "Theater & audio", "Commercial AV", "Consulting", "Service on an existing system"] %}
+          <label class="toggle"><input type="checkbox" name="systems" value="{{ s }}"><span>{{ s }}</span></label>
+          {%- endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="label">About you</legend>
+        <div class="fields">
+          <div class="field">
+            <label for="f-name">Full name (required)</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required data-err="Please tell us your name.">
+            <span class="err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email (required)</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required data-err="Please enter a valid email address.">
+            <span class="err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="f-town">Town or city (required)</label>
+            <input id="f-town" name="town" type="text" autocomplete="address-level2" required data-err="Please tell us where the property is.">
+            <span class="err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-stage">Project stage</label>
+            <select id="f-stage" name="stage">
+              <option>New construction</option>
+              <option>Renovation</option>
+              <option selected>Existing home or building</option>
+              <option>Service or upgrade</option>
+            </select>
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="f-time">Timing</label>
+            <select id="f-time" name="timing">
+              <option>As soon as possible</option>
+              <option selected>Within three months</option>
+              <option>Three to six months</option>
+              <option>Planning ahead</option>
+            </select>
+            <span class="err"></span>
+          </div>
+          <div class="field field--full">
+            <label for="f-msg">About the project</label>
+            <textarea id="f-msg" name="message" rows="5" placeholder="Size of the property, what you have now, what you would like it to do."></textarea>
+            <span class="err"></span>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form__status" id="form-status" tabindex="-1" role="status" hidden><strong class="h5"></strong><p class="small muted"></p></div>
+
+      <div class="form__foot">
+        <p class="small muted measure-s">Prefer to talk? Call <a class="tnum" href="tel:+18772667379" style="text-decoration:underline">(877) 266-7379</a>.</p>
+        <button class="btn btn--lg" type="submit">Send project details {{ arrow("btn__arrow") }}</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section night" aria-labelledby="next-title">
+  <div class="wrap">
+    <div class="grid sh mb-4">
+      <p class="label sh__label muted" data-reveal>What happens next</p>
+      <h2 class="d2 sh__title" id="next-title" data-split>Three steps to a&nbsp;proposal.</h2>
+    </div>
+    <ol class="steps">
+      <li data-reveal><span class="mono muted">Step 1</span><h3>A conversation</h3><p class="small muted">We talk through the property, what you have now and what you want it to do.</p></li>
+      <li data-reveal data-delay="100"><span class="mono muted">Step 2</span><h3>A site survey</h3><p class="small muted">We walk the home or building, check existing wiring and equipment, and note coverage&nbsp;needs.</p></li>
+      <li data-reveal data-delay="200"><span class="mono muted">Step 3</span><h3>Design and proposal</h3><p class="small muted">A clear system design with options, built from components we have proven in the&nbsp;field.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="map-title">
+  <div class="wrap grid area">
+    <div class="area__text">
+      <p class="label" data-reveal>Find us</p>
+      <h2 class="d3" id="map-title" data-split>1603 Springtown Rd, Alpha,&nbsp;NJ.</h2>
+      <p class="muted" data-reveal>Our office sits in Warren County near the Delaware River, a short drive from I-78 and Route 22 and the rest of North and Central New&nbsp;Jersey.</p>
+      <div class="flex-between" style="justify-content:flex-start" data-reveal>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=1603+Springtown+Rd+Alpha+NJ+08865" target="_blank" rel="noopener">Get directions {{ arrow("btn__arrow") }}</a>
+      </div>
+    </div>
+    <div class="area__map" data-reveal>{% include "_map.html" %}</div>
+  </div>
+</section>
+
+{% endblock %}

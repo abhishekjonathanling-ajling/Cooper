@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta %}
+{% block content %}
+{% set f = POSTS[0] %}
+
+<section class="phero" aria-labelledby="journal-title">
+  <div class="wrap">
+    <div class="phero__label">
+      <p class="label">Journal</p>
+      <p class="label muted">Notes from the field</p>
+    </div>
+    <h1 class="d1 phero__title" id="journal-title" data-split>Know your&nbsp;systems.</h1>
+    <div class="grid phero__intro">
+      <p class="mono muted phero__aside" data-reveal>{{ POSTS|length }} articles · Home and commercial</p>
+      <p class="lead" data-reveal data-delay="150">Practical writing on home and commercial technology, from the basics to the details that make a real difference. Written by the people who install&nbsp;it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(3rem,6vw,5rem)" aria-label="Featured article">
+  <div class="wrap">
+    <a class="feature" href="{{ f.slug }}.html">
+      {{ media(f.img, f.alt, "(min-width: 900px) 66vw, 100vw", eager=true) }}
+      <div class="feature__text" data-reveal>
+        <div class="post__meta mono"><span>{{ f.cat }}</span><span>{{ f.read }} min read</span></div>
+        <h2>{{ f.title }}</h2>
+        <p class="muted">{{ f.excerpt }}</p>
+        <span class="link">Read the article {{ arrow() }}</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="all-title">
+  <div class="wrap">
+    <hr class="rule mb-3">
+    <div class="flex-between mb-4">
+      <div class="stack" style="gap:.6rem">
+        <h2 class="d4" id="all-title">All articles</h2>
+        <p class="mono muted" id="filter-count" aria-live="polite">{{ POSTS|length - 1 }} articles</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by topic">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        {%- for c in CATS %}
+        <button class="filter" type="button" data-filter="{{ c }}" aria-pressed="false">{{ c }}</button>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="posts">
+      {%- for p in POSTS[1:] %}
+      <a class="post" href="{{ p.slug }}.html" data-cat="{{ p.cat }}" data-reveal data-delay="{{ (loop.index0 % 3) * 90 }}">
+        {{ media(p.img, p.alt, "(min-width: 1100px) 31vw, (min-width: 640px) 48vw, 100vw") }}
+        <div class="post__meta mono"><span>{{ p.cat }}</span><time datetime="{{ p.date }}">{{ p.date_h }}</time></div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.excerpt }}</p>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{{ cta("living-wood", "Have a question we have not covered?", "Call the office and talk to someone who installs these systems for a living. No sales script.") }}
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta %}
+{% block content %}
+
+<section class="phero" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="phero__label">
+      <p class="label">About Cooper</p>
+      <p class="label muted">Alpha, New Jersey</p>
+    </div>
+    <h1 class="d1 phero__title" id="about-title" data-split>Specialists in systems that have to&nbsp;work.</h1>
+    <div class="grid phero__intro">
+      <p class="mono muted phero__aside" data-reveal>Security / Fire / Surveillance<br>Access / Automation / Audio Video</p>
+      <p class="lead" data-reveal data-delay="150">For more than 30 years Cooper Technology Group has designed, installed and serviced security, fire, automation and audio video systems. We work for homeowners, builders, schools, practices and businesses across New Jersey, Eastern Pennsylvania and New&nbsp;York&nbsp;City.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    {{ media("blueprint", "A designer drafting a floor plan by hand with a scale ruler", "100vw", cls="about-hero__media", parallax="0.1", eager=true) }}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="principles-title">
+  <div class="wrap">
+    <div class="grid sh mb-4">
+      <p class="label sh__label" data-reveal>Principles</p>
+      <h2 class="d2 sh__title" id="principles-title" data-split>What thirty years have taught&nbsp;us.</h2>
+    </div>
+    <ol class="principles">
+      {%- for p in PRINCIPLES %}
+      <li class="principle" data-reveal>
+        <span class="mono muted">{{ loop.index }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section night" aria-labelledby="timeline-title">
+  <div class="wrap">
+    <div class="grid sh mb-4">
+      <p class="label sh__label muted" data-reveal>The field, then and now</p>
+      <div class="sh__title stack">
+        <h2 class="d2" id="timeline-title" data-split>The technology changed. The fundamentals did&nbsp;not.</h2>
+        <p class="muted measure" data-reveal>Over three decades the industry moved from copper lines and analog tape to cellular radios, IP video and apps. We installed every generation and kept what&nbsp;worked.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline__nav" role="tablist" aria-label="Decades" data-tabs data-auto="6000">
+        {%- for t in TIMELINE %}
+        <button class="timeline__btn" role="tab" type="button" id="tl-tab-{{ loop.index }}" aria-controls="tl-{{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}"><span class="mono">{{ t.kicker }}</span><strong>{{ t.era }}</strong></button>
+        {%- endfor %}
+      </div>
+      <div class="timeline__stage">
+        {%- for t in TIMELINE %}
+        <div class="timeline__panel{% if loop.first %} is-active{% endif %}" role="tabpanel" id="tl-{{ loop.index }}" aria-labelledby="tl-tab-{{ loop.index }}">
+          {{ media(t.img, t.alt, "(min-width: 900px) 50vw, 100vw", reveal=false) }}
+          <div class="timeline__text">
+            <h3 class="d4">{{ t.title }}</h3>
+            <p class="muted">{{ t.text }}</p>
+            <dl class="mono">
+              {%- for k, v in t.spec %}<dt>{{ k }}</dt><dd>{{ v }}</dd>{% endfor %}
+            </dl>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="aim-title">
+  <div class="wrap grid sh">
+    <p class="label sh__label" data-reveal>Purpose</p>
+    <div class="sh__title">
+      <h2 class="d3" id="aim-title" data-split>To be the first call in North and Central New Jersey for anyone who wants their property protected and their technology to simply&nbsp;work.</h2>
+      <div class="position__foot mt-4" style="grid-column:auto">
+        <div data-reveal>
+          <h3 class="h5">Careful design</h3>
+          <p class="small muted">A survey, a plan and a clear proposal before anything is ordered or&nbsp;installed.</p>
+        </div>
+        <div data-reveal data-delay="100">
+          <h3 class="h5">Experienced installers</h3>
+          <p class="small muted">Our own technicians, who know the difference between a device that works and one that lasts.</p>
+        </div>
+        <div data-reveal data-delay="200">
+          <h3 class="h5">Service that continues</h3>
+          <p class="small muted">Monitoring, maintenance and upgrades from the team that put the system&nbsp;in.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section grey" aria-labelledby="sectors-title">
+  <div class="wrap">
+    <div class="flex-between mb-4">
+      <div class="stack">
+        <p class="label" data-reveal>Who we work with</p>
+        <h2 class="d3" id="sectors-title" data-split>Homes, practices, schools and&nbsp;clubs.</h2>
+      </div>
+      <a class="link" href="commercial.html#sectors" data-reveal>Commercial sectors {{ arrow() }}</a>
+    </div>
+    <div class="sectors">
+      {%- for s in ABOUT_SECTORS %}
+      <article class="sector" data-reveal data-delay="{{ loop.index0 * 80 }}">
+        {{ media(s.img, s.alt, "(min-width: 900px) 25vw, 50vw") }}
+        <h3>{{ s.title }}</h3>
+        <p class="small muted">{{ s.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="area-title">
+  <div class="wrap grid area">
+    <div class="area__text">
+      <p class="label" data-reveal>Service area</p>
+      <h2 class="d3" id="area-title" data-split>Based in Alpha. Working across New&nbsp;Jersey and&nbsp;NYC.</h2>
+      <p class="muted" data-reveal>Our office is in Alpha, Warren County, a few minutes from the Pennsylvania line. We work throughout North Jersey and Central New Jersey, in Eastern Pennsylvania, and on projects in New York&nbsp;City.</p>
+      <ul class="ticks" data-reveal>
+        <li>North Jersey</li><li>Central New Jersey</li><li>Eastern Pennsylvania</li><li>New York City</li>
+      </ul>
+      <a class="link" href="contact.html" data-reveal>Contact the office {{ arrow() }}</a>
+    </div>
+    <div class="area__map" data-reveal>{% include "_map.html" %}</div>
+  </div>
+</section>
+
+{{ cta("arch-white", "Work with a team that has seen it all.", "Whether it is a new home, a school or a system someone else installed, we will tell you plainly what it needs.") }}
+
+{% endblock %}

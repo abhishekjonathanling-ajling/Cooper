@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta %}
+{% block content %}
+{% set p = page.post %}
+
+<article>
+  <header class="article-hero">
+    <div class="wrap">
+      <div class="article-hero__meta mono">
+        <a href="blog.html" class="link" style="font-family:var(--font);text-transform:none;letter-spacing:-.005em"><span style="display:inline-flex;transform:rotate(180deg)">{{ arrow() }}</span> Journal</a>
+        <span>{{ p.cat }}</span>
+        <time datetime="{{ p.date }}">{{ p.date_h }}</time>
+        <span>{{ p.read }} min read</span>
+      </div>
+      <h1 data-split>{{ p.title }}</h1>
+      <p class="lead" data-reveal data-delay="300">{{ p.excerpt }}</p>
+      {{ media(p.img, p.alt, "100vw", parallax="0.08", eager=true) }}
+    </div>
+  </header>
+  <div class="wrap article">
+    <aside class="article__aside">
+      <div class="stack" style="gap:.4rem">
+        <p class="label muted">Written by</p>
+        <p class="small">Cooper Technology Group</p>
+      </div>
+      <div class="stack" style="gap:.4rem">
+        <p class="label muted">Need help with this?</p>
+        <a class="small tnum" href="tel:+18772667379" style="text-decoration:underline">(877) 266-7379</a>
+      </div>
+    </aside>
+    <div class="article__body">
+      {{ p.body|safe }}
+    </div>
+  </div>
+</article>
+
+<section class="section grey" aria-labelledby="more-title">
+  <div class="wrap">
+    <div class="flex-between mb-4">
+      <h2 class="d3" id="more-title">Keep reading</h2>
+      <a class="link" href="blog.html">All articles {{ arrow() }}</a>
+    </div>
+    <div class="posts">
+      {%- for r in page.related %}
+      <a class="post" href="{{ r.slug }}.html" data-reveal data-delay="{{ loop.index0 * 90 }}">
+        {{ media(r.img, r.alt, "(min-width: 1100px) 31vw, (min-width: 640px) 48vw, 100vw") }}
+        <div class="post__meta mono"><span>{{ r.cat }}</span><time datetime="{{ r.date }}">{{ r.date_h }}</time></div>
+        <h3>{{ r.title }}</h3>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{{ cta() }}
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta, disclose %}
+{% block content %}
+
+<section class="rhero" aria-labelledby="res-title">
+  {{ media("dusk-lawn", "A black timber house at dusk with warm light through tall windows", "100vw", reveal=false, parallax="0.1", eager=true) }}
+  <div class="wrap rhero__inner">
+    <div class="flex-between" style="padding-top:calc(var(--nav-h) + 1.5rem)">
+      <p class="label">Residential</p>
+      <p class="label" style="text-align:right">Home Security<br>&amp; Control</p>
+    </div>
+    <div style="flex:1"></div>
+    <h1 class="mega" id="res-title" data-split>Your home, <br>run quietly.</h1>
+    <div class="grid rhero__row">
+      <p class="lead" data-reveal data-delay="400">Home security systems, smart home automation, lighting, home theater and multi-room audio, designed as one system for homes across North and Central New&nbsp;Jersey.</p>
+      <nav class="rhero__nav" aria-label="Residential services" data-reveal data-delay="550">
+        {%- for s in RES %}<a class="chip" href="#{{ s.id }}">{{ s.short }}</a>{% endfor %}
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="approach-title">
+  <div class="wrap">
+    <div class="grid sh">
+      <p class="label sh__label" data-reveal>The approach</p>
+      <div class="sh__title stack">
+        <h2 class="d2" id="approach-title" data-split>Smart homes got a reputation for being complicated. That was an installation&nbsp;problem.</h2>
+        <p class="lead muted measure" data-reveal>Technology at home should make life simpler. One button turns on the TV and everything it needs. A glance at your phone shows the kids in the backyard. We start by asking what you want, build exactly that, and leave room to add more&nbsp;later.</p>
+      </div>
+    </div>
+    <div class="personas mt-4">
+      <article class="persona" data-reveal>
+        {{ media("kitchen", "A bright kitchen with white cabinetry, oak stools and pendant lights", "(min-width: 760px) 50vw, 100vw") }}
+        <p class="label muted">Convenience first</p>
+        <p class="persona__q d4">One tap: garage open, alarm off, lights on, music playing.</p>
+        <p class="small muted measure">Some clients want control of everything from a single app, and a button by the door that sets the whole house for the&nbsp;evening.</p>
+      </article>
+      <article class="persona" data-reveal data-delay="120">
+        {{ media("white-house", "A white, minimal house with deep window reveals under a clear sky", "(min-width: 760px) 50vw, 100vw") }}
+        <p class="label muted">Security first</p>
+        <p class="persona__q d4">See who is at the door, and know the garage is&nbsp;closed.</p>
+        <p class="small muted measure">Others want certainty: live video of the front door, a text if the power fails and another when it is restored, proof that every door is&nbsp;shut.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="res-services-title">
+  <div class="wrap">
+    <div class="flex-between mb-3">
+      <h2 class="d3" id="res-services-title" data-split>Residential&nbsp;systems</h2>
+      <p class="mono muted">{{ RES|length }} disciplines, one&nbsp;team</p>
+    </div>
+    <div class="svc">
+      {%- for s in RES %}
+      <article class="svc-row" id="{{ s.id }}" aria-labelledby="{{ s.id }}-t">
+        <span class="mono muted svc-row__idx">{{ "%02d" % loop.index }}</span>
+        <div class="svc-row__head">
+          <h3 id="{{ s.id }}-t" data-split>{{ s.title|safe }}</h3>
+          <p class="muted measure" data-reveal>{{ s.text }}</p>
+          <ul class="specs" data-reveal>{% for t in s.specs %}<li>{{ t }}</li>{% endfor %}</ul>
+          <div class="svc-row__more" data-reveal>
+            {% set body %}
+              <ul class="ticks">{% for t in s.ticks %}<li>{{ t }}</li>{% endfor %}</ul>
+              {% if s.note %}<p class="small muted">{{ s.note }}</p>{% endif %}
+            {% endset %}
+            {{ disclose("res-" ~ s.id ~ "-d", "What is included", body) }}
+          </div>
+        </div>
+        {{ media(s.img, s.alt, "(min-width: 900px) 40vw, 100vw", parallax="0.06") }}
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section night" aria-labelledby="day-title">
+  <div class="wrap grid day">
+    <div class="day__head">
+      <div class="stack">
+        <p class="label muted" data-reveal>A day in a Cooper home</p>
+        <h2 class="d2" id="day-title" data-split>The house keeps time with&nbsp;you.</h2>
+      </div>
+      <p class="muted measure-s" data-reveal>Schedules, sensors and scenes do the routine work, so the technology stays in the&nbsp;background.</p>
+    </div>
+    <div class="day__view" aria-hidden="true">
+      {%- for d in DAY %}
+      <div class="day__img{% if loop.first %} is-active{% endif %}" data-img-key="{{ d.img }}">{{ img(d.img, "", "(min-width: 900px) 58vw, 100vw") }}</div>
+      {%- endfor %}
+      <span class="day__clock">{{ DAY[0].time }}</span>
+    </div>
+    <div class="day__list" role="tablist" aria-label="Times of day" aria-orientation="vertical">
+      {%- for d in DAY %}
+      <button class="day__item" role="tab" type="button" aria-selected="{{ 'true' if loop.first else 'false' }}" data-time="{{ d.time }}" data-img="{{ d.img }}">
+        <span class="t">{{ d.time }}</span><strong>{{ d.title }}</strong>
+        <span class="small">{{ d.text }}</span>
+      </button>
+      {%- endfor %}
+    </div>
+    <div class="day__bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-title">
+  <div class="wrap grid faq">
+    <div class="faq__head stack">
+      <p class="label" data-reveal>Questions</p>
+      <h2 class="d3" id="faq-title" data-split>Residential questions,&nbsp;answered.</h2>
+      <p class="muted" data-reveal>Something else on your mind? Call <a class="nowrap" href="tel:+18772667379" style="text-decoration:underline">(877) 266-7379</a>.</p>
+    </div>
+    <div class="faq__list" data-accordion>
+      {%- for q in RES_FAQ %}
+      {% set a %}<p>{{ q.a }}</p>{% endset %}
+      {{ disclose("rfaq-" ~ loop.index, q.q, a) }}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{{ cta("interior-fire", "Plan the house you want to live in.", "Building, renovating or upgrading what you already have. We will walk the property with you and design around how you live.") }}
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta %}
+{% block content %}
+
+<section class="phero" aria-labelledby="svc-title">
+  <div class="wrap">
+    <div class="phero__label">
+      <p class="label">Services</p>
+      <p class="label muted">Residential and commercial</p>
+    </div>
+    <h1 class="d1 phero__title" id="svc-title" data-split>Every system, one&nbsp;team.</h1>
+    <div class="grid phero__intro">
+      <div class="phero__aside" data-reveal>
+        <div class="seg" role="tablist" aria-label="Service type">
+          <span class="seg__pill" aria-hidden="true"></span>
+          <button role="tab" type="button" id="seg-res" aria-controls="svc-residential" aria-selected="true">Residential</button>
+          <button role="tab" type="button" id="seg-com" aria-controls="svc-commercial" aria-selected="false">Commercial</button>
+        </div>
+      </div>
+      <p class="lead" data-reveal data-delay="150">Fourteen disciplines, from home security systems and Control4 automation to commercial access control and AV. Each one is designed, installed and serviced by our own&nbsp;team.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(3rem,6vw,5rem)" aria-label="Service list">
+  <div class="wrap">
+    <div class="cursor-img" aria-hidden="true">
+      {%- for s in RES + COM %}{{ img(s.img, "", "20rem", key=s.img) }}{% endfor %}
+    </div>
+    {%- for group in [("residential", "Residential", RES, "residential.html"), ("commercial", "Commercial", COM, "commercial.html")] %}
+    <div id="svc-{{ group[0] }}" role="tabpanel" aria-labelledby="seg-{{ group[0][:3] }}" data-hide{% if not loop.first %} hidden{% endif %}>
+      <div class="slist" data-accordion>
+        {%- for s in group[2] %}
+        <div class="slist__item">
+          <button class="slist__btn" type="button" aria-expanded="false" aria-controls="sl-{{ group[0] }}-{{ s.id }}" data-disclose data-img="{{ s.img }}">
+            <span class="mono muted">{{ "%02d" % loop.index }}</span>
+            <span class="ttl">{{ s.title|safe }}</span>
+            <span style="display:flex;align-items:center;gap:1.25rem"><span class="mono cat">{{ s.cat }}</span><span class="disclose__icon" aria-hidden="true"></span></span>
+          </button>
+          <div class="disclose__panel" id="sl-{{ group[0] }}-{{ s.id }}">
+            <div>
+              <div class="slist__body">
+                {{ media(s.img, s.alt, "(min-width: 900px) 40vw, 100vw", reveal=false) }}
+                <div class="slist__copy">
+                  <p class="lead">{{ s.text }}</p>
+                  <ul class="ticks">{% for t in s.ticks[:4] %}<li>{{ t }}</li>{% endfor %}</ul>
+                  <a class="link" href="{{ group[3] }}#{{ s.anchor or s.id }}">Full details {{ arrow() }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section grey" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="grid sh mb-4">
+      <p class="label sh__label" data-reveal>How a project runs</p>
+      <div class="sh__title stack">
+        <h2 class="d2" id="process-title" data-split>Six steps, the same team&nbsp;throughout.</h2>
+        <p class="muted measure" data-reveal>Whether it is one smart lock or a school campus, the process is the same. It is how we keep systems simple to use and easy to&nbsp;service.</p>
+      </div>
+    </div>
+    <ol class="process">
+      {%- for p in PROCESS %}
+      <li data-reveal data-delay="{{ loop.index0 * 70 }}">
+        <span class="mono">Step {{ loop.index }}</span>
+        <h3>{{ p.title }}</h3>
+        <p class="small muted">{{ p.text }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="band" aria-label="Interior with integrated lighting">
+  {{ media("kitchen-pendant", "A modern kitchen with pendant lights and an island", "100vw", parallax="0.12") }}
+  <div class="band__caption">
+    <p class="d3" style="max-width:16ch" data-split>Fewer switches. Fewer remotes. Fewer&nbsp;surprises.</p>
+  </div>
+</section>
+
+{{ cta("dusk-black", "Not sure where to start?", "Tell us about the property and what is bothering you about it. We will recommend the systems that matter and skip the ones that do not.") }}
+
+{% endblock %}

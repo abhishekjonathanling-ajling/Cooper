@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% from "_macros.html" import arrow, img, media, cta %}
+{% block content %}
+
+<!-- 1. Hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__bg">{{ img("hero-dusk", "A modern house at dusk, its interior lit behind floor-to-ceiling glass", "100vw", eager=true, parallax="0.12") }}</div>
+  <div class="wrap hero__top">
+    <p class="label">Security · Automation<br>Audio · Access</p>
+    <p class="label" style="text-align:right">Systems for homes<br>and buildings across<br>New Jersey and NYC</p>
+  </div>
+  <div class="wrap hero__body">
+    <h1 class="mega hero__title" id="hero-title" data-split>Technology, <br>quietly integrated.</h1>
+    <div class="grid hero__row">
+      <p class="hero__copy" data-reveal data-delay="500">We design and install security, automation, audio, video and access systems for homes and businesses across New&nbsp;Jersey and New&nbsp;York&nbsp;City.</p>
+      <div class="hero__ctas" data-reveal data-delay="650">
+        <a class="btn btn--light" href="contact.html">Start a Project {{ arrow("btn__arrow") }}</a>
+        <a class="btn btn--line" href="services.html">Explore services {{ arrow("btn__arrow") }}</a>
+      </div>
+      <div class="hero__meta" data-reveal data-delay="800">
+        <strong class="tnum"><span data-count="30">30</span>+</strong>
+        <span class="label">Years designing<br>and installing systems</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap hero__foot">
+    <span class="mono">40.67° N, 75.16° W · Alpha, New Jersey</span>
+    <span class="mono">Residential / Commercial</span>
+    <span class="scrollcue mono"><i aria-hidden="true"></i>Scroll</span>
+  </div>
+</section>
+
+<!-- 2. Positioning -->
+<section class="section" aria-labelledby="practice-title">
+  <div class="wrap grid position">
+    <p class="label position__label" data-reveal>The practice</p>
+    <h2 class="d3 position__text" id="practice-title" data-split>Cooper designs the systems a&nbsp;building depends on. Security, fire, cameras, access, lighting, climate, sound and picture, <span class="stone">planned together, installed by our own technicians and supported for as long as you own&nbsp;them.</span></h2>
+    <div class="position__foot">
+      <div data-reveal>
+        <h3 class="h5">Designed, not assembled</h3>
+        <p class="small muted">Every project starts with a survey of the property and a conversation about how you use it. Equipment comes&nbsp;after.</p>
+      </div>
+      <div data-reveal data-delay="100">
+        <h3 class="h5">Proven components</h3>
+        <p class="small muted">We specify hardware we have tested in the field for years, in configurations we know will hold&nbsp;up.</p>
+      </div>
+      <div data-reveal data-delay="200">
+        <h3 class="h5">One point of contact</h3>
+        <p class="small muted">The people who install your system are the people who service it. No call centers, no starting&nbsp;over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Residential / Commercial -->
+<section class="section" style="padding-top:0" aria-labelledby="split-title">
+  <div class="wrap">
+    <div class="grid sh mb-4">
+      <p class="label sh__label" data-reveal>Two disciplines</p>
+      <h2 class="d2 sh__title" id="split-title" data-split>Homes and buildings ask different things of&nbsp;a&nbsp;system.</h2>
+    </div>
+    <div class="split">
+      <a class="split__panel" href="residential.html" data-reveal>
+        {{ media("dusk-timber", "", "(min-width: 900px) 60vw, 100vw", parallax="0.06") }}
+        <div class="split__top"><span class="label">For homes</span><span class="mono">01</span></div>
+        <div class="split__bottom">
+          <h3 class="split__title">Residential</h3>
+          <p class="split__text">Home security systems, smart home automation and entertainment for private residences across North and Central New&nbsp;Jersey.</p>
+          <ul class="split__list"><li>Security &amp; surveillance</li><li>Smart locks</li><li>Automation</li><li>Lighting &amp; shades</li><li>Home theater</li><li>Multi-room audio</li></ul>
+          <span class="split__go"><i>{{ arrow() }}</i>Explore residential</span>
+        </div>
+      </a>
+      <a class="split__panel" href="commercial.html" data-reveal data-delay="120">
+        {{ media("office-glass", "", "(min-width: 900px) 60vw, 100vw", parallax="0.06") }}
+        <div class="split__top"><span class="label">For business</span><span class="mono">02</span></div>
+        <div class="split__bottom">
+          <h3 class="split__title">Commercial</h3>
+          <p class="split__text">Commercial security systems, fire, surveillance, access control and AV for schools, offices, practices, clubs and&nbsp;retail.</p>
+          <ul class="split__list"><li>Security &amp; fire</li><li>Surveillance</li><li>Access control</li><li>Audio &amp; video</li><li>Retail &amp; professional</li><li>Integrated buildings</li></ul>
+          <span class="split__go"><i>{{ arrow() }}</i>Explore commercial</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Services switcher -->
+<section class="switcher" aria-labelledby="switch-title">
+  <div class="switcher__stage" aria-hidden="true">
+    {%- for s in SWITCH %}
+    <div class="switcher__img{% if loop.first %} is-active{% endif %}">{{ img(s.img, "", "100vw") }}</div>
+    {%- endfor %}
+  </div>
+  <div class="wrap switcher__inner">
+    <div class="switcher__head">
+      <h2 class="label" id="switch-title">What we install</h2>
+      <p class="label" style="color:var(--night-mute);text-align:right">Hover or tap a system</p>
+    </div>
+    <div class="grid switcher__body">
+      <div class="switcher__list" role="group" aria-label="Systems">
+        {%- for s in SWITCH %}
+        <button class="switcher__item{% if loop.first %} is-active{% endif %}" type="button" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-controls="sw-{{ loop.index }}"><span class="num">{{ "%02d" % loop.index }}</span><span class="word">{{ s.word }}</span></button>
+        {%- endfor %}
+      </div>
+      <div class="switcher__detail" aria-live="polite">
+        {%- for s in SWITCH %}
+        <div class="switcher__panel" id="sw-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
+          <h3 class="h5">{{ s.title }}</h3>
+          <p class="small" style="color:#d6d8da">{{ s.text }}</p>
+          <ul class="spec mono">
+            {%- for k, v in s.spec %}<li><span>{{ k }}</span><span>{{ v }}</span></li>{% endfor %}
+          </ul>
+          <a class="link" href="{{ s.href }}">Read more {{ arrow() }}</a>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="switcher__foot">
+      <span class="mono" style="color:var(--night-mute)">Residential and commercial</span>
+      <a class="link" href="services.html">All services {{ arrow() }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Experience -->
+<section class="section" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="grid exp">
+      <p class="exp__num tnum" aria-label="More than 30 years"><span data-count="30">30</span><sup>+</sup></p>
+      <div class="exp__text">
+        <p class="label" data-reveal>Experience</p>
+        <h2 class="d4" id="exp-title" data-split>Three decades of installing, servicing and learning what&nbsp;lasts.</h2>
+        <p class="muted" data-reveal>Most problems we are called to fix began as installation problems: a smoke sensor too close to a duct, outdoor cameras on indoor brackets, Wi-Fi asked to do a cable's job. Thirty years in the field teaches you to avoid&nbsp;them.</p>
+        <a class="link" href="about.html" data-reveal>About Cooper {{ arrow() }}</a>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat" data-reveal>
+        <p class="stat__v">24/7</p>
+        <p class="small muted">Central station monitoring for burglary, fire and carbon&nbsp;monoxide.</p>
+      </div>
+      <div class="stat" data-reveal data-delay="100">
+        <p class="stat__v"><span data-count="4">4</span>K</p>
+        <p class="small muted">Camera resolution on our hardwired commercial surveillance&nbsp;systems.</p>
+      </div>
+      <div class="stat" data-reveal data-delay="200">
+        <p class="stat__v"><span data-count="64">64</span></p>
+        <p class="small muted">Doors managed from a single access control system, each event logged with a&nbsp;photo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Architectural band -->
+<section class="band" aria-label="The best system is the one you stop noticing">
+  {{ media("dusk-black", "A dark timber house at twilight with warm light in every window", "100vw", parallax="0.14") }}
+  <div class="band__caption">
+    <p class="d3" data-split>The best system is <br>the one you stop&nbsp;noticing.</p>
+  </div>
+</section>
+
+<!-- 7. Integrated control -->
+<section class="section" aria-labelledby="scenes-title">
+  <div class="wrap grid scenes">
+    <div class="scenes__intro">
+      <div class="stack">
+        <p class="label" data-reveal>Integrated control</p>
+        <h2 class="d3" id="scenes-title" data-split>One press. The house&nbsp;responds.</h2>
+        <p class="muted" data-reveal>With Control4, lighting, shades, climate, music, cameras and the alarm share one interface. We program scenes around your routine, so the house does in a second what used to take a walk through every&nbsp;room.</p>
+      </div>
+      <div class="scenes__tabs" role="tablist" aria-label="Scenes" data-reveal>
+        {%- for s in SCENES %}
+        <button class="scenes__tab" role="tab" type="button" aria-selected="{{ 'true' if loop.first else 'false' }}" aria-controls="scene-view" data-veil="{{ s.veil }}" data-shade="{{ s.shade }}" data-lights="{{ s.lights }}" data-shades="{{ s.shades }}" data-security="{{ s.security }}" data-audio="{{ s.audio }}">
+          <strong>{{ s.name }}</strong><span class="mono">{{ s.time }}</span>
+          <span class="small">{{ s.text }}</span>
+        </button>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="scenes__view" id="scene-view" role="tabpanel" aria-label="Scene preview" data-reveal>
+      {{ media("living-open", "An open living room with glass walls onto a timber deck", "(min-width: 900px) 62vw, 100vw", reveal=false) }}
+      <div class="scenes__shade" aria-hidden="true"></div>
+      <div class="scenes__veil" aria-hidden="true"></div>
+      <div class="scenes__hud" aria-live="polite">
+        <div><span class="mono">Lighting</span><span class="v" data-k="lights">{{ SCENES[0].lights }}</span></div>
+        <div><span class="mono">Shades</span><span class="v" data-k="shades">{{ SCENES[0].shades }}</span></div>
+        <div><span class="mono">Security</span><span class="v" data-k="security">{{ SCENES[0].security }}</span></div>
+        <div><span class="mono">Audio</span><span class="v" data-k="audio">{{ SCENES[0].audio }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Selected capabilities -->
+<section class="hs" aria-labelledby="caps-title">
+  <div class="hs__sticky">
+    <div class="wrap hs__head">
+      <div class="stack">
+        <p class="label">Selected capabilities</p>
+        <h2 class="d2" id="caps-title" data-split>Built from&nbsp;details.</h2>
+      </div>
+      <p class="muted measure-s" data-reveal>A few of the things we design, install and service every week, in homes and commercial&nbsp;buildings.</p>
+    </div>
+    <div class="hs__track">
+      {%- for c in CAPS %}
+      <article class="cap{% if c.wide %} cap--wide{% endif %}">
+        {{ media(c.img, c.alt, "(min-width: 900px) 40vw, 86vw", reveal=false) }}
+        <div class="cap__meta"><span class="mono muted">{{ c.tag }}</span><span class="mono muted">{{ "%02d" % loop.index }} / {{ "%02d" % CAPS|length }}</span></div>
+        <h3>{{ c.title }}</h3>
+        <p class="small muted">{{ c.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="wrap"><div class="hs__progress"><i></i></div></div>
+  </div>
+</section>
+
+<!-- 9. Trust: field notes + platforms -->
+<section class="section grey" aria-labelledby="notes-title">
+  <div class="wrap grid notes">
+    <div class="notes__head">
+      <p class="label" data-reveal>From the field</p>
+      <h2 class="d3" id="notes-title" data-split>Why installation matters.</h2>
+      <p class="muted" data-reveal>Real calls from systems we installed and monitor. Each one came down to a sensor in the right place and a signal that got&nbsp;through.</p>
+      <a class="link" href="residential.html#security" data-reveal>Home security systems {{ arrow() }}</a>
+    </div>
+    <div class="notes__list">
+      {%- for n in NOTES %}
+      <article class="note" data-reveal>
+        <div class="note__where"><span class="mono">{{ n.where }}</span><span class="mono muted">{{ n.what }}</span></div>
+        <div class="note__body">
+          <h3>{{ n.title }}</h3>
+          <p class="small muted">{{ n.text }}</p>
+          <span class="mono note__out">{{ n.out }}</span>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+  <div class="wrap mt-4">
+    <p class="label mb-2">Platforms we install and service</p>
+  </div>
+  <div class="marquee" aria-label="Platforms: {{ PARTNERS|join(', ') }}">
+    <div class="marquee__track" aria-hidden="true">
+      {%- for i in range(2) %}{% for p in PARTNERS %}<span>{{ p }}</span>{% endfor %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 10. CTA -->
+{{ cta() }}
+
+{% endblock %}
